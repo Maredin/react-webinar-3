@@ -44,7 +44,8 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, { code: this.state.key, title: 'Новая запись', clicked: 0 }],
+      key: this.state.key + 1
     })
   };
 
@@ -59,6 +60,8 @@ class Store {
     })
   };
 
+
+
   /**
    * Выделение записи по коду
    * @param code
@@ -67,8 +70,14 @@ class Store {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
+        if (item.code !== code) {
+          item.selected = false;
+        }
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) {
+            item.clicked++;
+          }
         }
         return item;
       })
