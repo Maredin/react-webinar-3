@@ -11,6 +11,17 @@ function App({ store }) {
 
   const list = store.getState().list;
 
+  function validateClicked(clickedItem) {
+    if (clickedItem > 1 && clickedItem < 5) {
+      return "раза"
+    } else if (clickedItem > 20) {
+      if (clickedItem % 10 > 1 && clickedItem % 10 < 5) {
+        return "раза"
+      }
+    }
+    return "раз"
+  };
+
   return (
     <div className='App'>
       <div className='App-head'>
@@ -24,9 +35,9 @@ function App({ store }) {
           list.map(item =>
             <div key={item.code} className='List-item'>
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
-                onClick={() => store.selectItem(item.code)}>
+                onClick={(e) => { e.target.tagName != 'BUTTON' ? store.selectItem(item.code) : '' }}>
                 <div className='Item-code'>{item.code}</div>
-                <div className='Item-title'>{item.title} {item.clicked > 0 ? ` | Выделяли ${item.clicked} раз` : ''}</div>
+                <div className='Item-title'>{item.title} {item.clicked > 0 ? ` | Выделяли ${item.clicked} ${validateClicked(item.clicked)}` : ''}</div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
                     Удалить
