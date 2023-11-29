@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import { generateCode } from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -46,8 +46,38 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
+      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }]
     })
+  };
+
+  /**
+   * Добавление записи по коду
+   * @param title
+   */
+  addBasket(title) {
+    const [newItem] = this.state.list.filter((item) => item.title == title);
+
+    if (this.state.basket.length > 0) {
+      let dubleItem = this.state.basket.some(item => item.title === newItem.title);
+
+      if (dubleItem) {
+        newItem.quantity += 1;
+      } else {
+        newItem.quantity = 1;
+        this.setState({
+          ...this.state,
+          basket: [...this.state.basket, newItem]
+        })
+      }
+
+    } else {
+      newItem.quantity = 1;
+      this.setState({
+        ...this.state,
+        basket: [...this.state.basket, newItem]
+      })
+    }
+
   };
 
   /**
@@ -79,7 +109,7 @@ class Store {
           };
         }
         // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
+        return item.selected ? { ...item, selected: false } : item;
       })
     })
   }

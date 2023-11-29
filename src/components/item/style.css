@@ -23,3 +23,8 @@
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;
 }
+
+.Item-price {
+  white-space: nowrap;
+  padding: 20px 14px;
+}
