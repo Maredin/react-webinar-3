@@ -51,7 +51,7 @@ class Store {
   };
 
   /**
-   * Добавление записи по коду
+   * Добавление в корзину
    * @param title
    */
   addBasket(title) {
@@ -61,13 +61,25 @@ class Store {
       let dubleItem = this.state.basket.some(item => item.title === newItem.title);
 
       if (dubleItem) {
-        newItem.quantity += 1;
+        let newBasket = this.state.basket;
+        newBasket.forEach(item => {
+          if (item.title == title) {
+            item.quantity += 1;
+          }
+        })
+
+        this.setState({
+          ...this.state,
+          basket: [...newBasket]
+        })
+
       } else {
         newItem.quantity = 1;
         this.setState({
           ...this.state,
           basket: [...this.state.basket, newItem]
         })
+
       }
 
     } else {
@@ -79,6 +91,19 @@ class Store {
     }
 
   };
+
+  /**
+   * Удаление из корзины
+   * @param title
+   */
+  deliteBasket(title) {
+    this.setState({
+      ...this.state,
+      // Новый список, в котором не будет удаляемой записи
+      basket: this.state.basket.filter(item => item.title !== title)
+    })
+  };
+
 
   /**
    * Удаление записи по коду

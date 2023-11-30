@@ -13,6 +13,7 @@ import Basket from './components/basket';
 function App({ store }) {
 
   const list = store.getState().list;
+  const basket = store.getState().basket;
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
@@ -30,20 +31,21 @@ function App({ store }) {
     onAddBasket: useCallback((code) => {
       store.addBasket(code);
     }, [store]),
+
+    deliteBasket: useCallback((code) => {
+      store.deliteBasket(code);
+    }, [store]),
   }
 
   return (
     <PageLayout>
       <Head title='Магазин' />
-      <Controls onAdd={callbacks.onAddItem} />
-      <Basket list={list}
+      <Controls onAdd={callbacks.onAddItem} basket={basket} />
+      <Basket basket={basket} deliteBasket={callbacks.deliteBasket} />
+      <List list={list}
         onDeleteItem={callbacks.onDeleteItem}
         onSelectItem={callbacks.onSelectItem}
         onAddBasket={callbacks.onAddBasket} />
-      {/*       <List list={list}
-        onDeleteItem={callbacks.onDeleteItem}
-        onSelectItem={callbacks.onSelectItem}
-        onAddBasket={callbacks.onAddBasket} /> */}
     </PageLayout>
   );
 }

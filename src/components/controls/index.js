@@ -1,22 +1,51 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { plural } from "../../utils";
 import './style.css';
 
-function Controls({ onAdd }) {
+function Controls({ basket }) {
+  // Показать корзину
+  function goBasket() {
+    const basket = document.querySelector('.Basket__wrapper');
+    basket.style.display = 'flex';
+  }
+
+  // Стоимость товара
+  function amount() {
+    let result = 0;
+    for (let item of basket) {
+      result += item.price * item.quantity;
+    }
+    return result;
+  }
+
+  function plur() {
+    return (
+      basket.length ? `${basket.length}  ${plural(basket.length, {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров'
+      })} / ${amount()} ₽` : 'пусто'
+    )
+  }
+
+
   return (
     <div className='Controls'>
-      <div className="Bascet">В корзине: пусто</div>
-      <button onClick={() => onAdd()}>Перейти</button>
+      <div className="Bascet">В корзине: <span> {plur()} </span></div>
+      <button onClick={() => goBasket()}>Перейти</button>
     </div>
   )
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  onAdd: PropTypes.func,
+  goBasket: PropTypes.func
 };
 
 Controls.defaultProps = {
-  onAdd: () => { }
+  onAdd: () => { },
+  goBasket: () => { }
 }
 
 export default React.memo(Controls);

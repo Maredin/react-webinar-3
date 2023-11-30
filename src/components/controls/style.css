@@ -13,3 +13,12 @@
 .Controls button {
   width: 80px;
 }
+
+.Bascet span {
+  color: #000;
+  font-family: Arial;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  margin-left: 15px;
+}
