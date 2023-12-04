@@ -25,7 +25,7 @@ function Controls({ basket }) {
         one: 'товар',
         few: 'товара',
         many: 'товаров'
-      })} / ${amount()} ₽` : 'пусто'
+      })} / ${amount().toLocaleString('ru-RU')} ₽` : 'пусто'
     )
   }
 

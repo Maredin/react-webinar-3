@@ -52,18 +52,18 @@ class Store {
 
   /**
    * Добавление в корзину
-   * @param title
+   * @param code
    */
-  addBasket(title) {
-    const [newItem] = this.state.list.filter((item) => item.title == title);
+  addBasket(code) {
+    const [newItem] = this.state.list.filter((item) => item.code == code);
 
     if (this.state.basket.length > 0) {
-      let dubleItem = this.state.basket.some(item => item.title === newItem.title);
+      let dubleItem = this.state.basket.some(item => item.code === newItem.code);
 
       if (dubleItem) {
         let newBasket = this.state.basket;
         newBasket.forEach(item => {
-          if (item.title == title) {
+          if (item.code == code) {
             item.quantity += 1;
           }
         })
@@ -96,11 +96,11 @@ class Store {
    * Удаление из корзины
    * @param title
    */
-  deliteBasket(title) {
+  deliteBasket(code) {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      basket: this.state.basket.filter(item => item.title !== title)
+      basket: this.state.basket.filter(item => item.code !== code)
     })
   };
 

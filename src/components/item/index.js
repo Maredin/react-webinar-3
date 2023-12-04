@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { object } from "prop-types";
 import { plural } from "../../utils";
 import './style.css';
 
@@ -14,7 +14,7 @@ function Item(props) {
     },
     onAddBasket: (e) => {
       e.stopPropagation();
-      props.onAddBasket(props.item.title);
+      props.onAddBasket(props.item.code);
     }
   }
 
@@ -25,7 +25,7 @@ function Item(props) {
       <div className='Item-title'>
         {props.item.title}
       </div>
-      <div className="Item-price">{props.item.price} ₽</div>
+      <div className="Item-price">{props.item.price.toLocaleString('ru-RU')} ₽</div>
       <div className='Item-actions'>
         <button onClick={callbacks.onAddBasket}>
           Добавить
