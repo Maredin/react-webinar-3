@@ -3,7 +3,7 @@ import PropTypes, { func } from 'prop-types';
 import './style.css';
 import ItemBasket from "../itemBasket";
 
-function Basket({ basket, deliteBasket, amount }) {
+function Basket({ basket, deliteBasket, amount, closeBasket }) {
 	function hideBasket() {
 		const basket = document.querySelector('.Basket__wrapper');
 		basket.style.display = 'none';
@@ -23,7 +23,7 @@ function Basket({ basket, deliteBasket, amount }) {
 					<h2 className="Basket__header-title">
 						Корзина
 					</h2>
-					<button className="Basket__header-btn" onClick={() => { hideBasket() }}>Закрыть</button>
+					<button className="Basket__header-btn" onClick={() => { closeBasket() }}>Закрыть</button>
 				</div>
 				<div className="Basket__products">
 					<ItemBasket basket={basket} deliteBasket={deliteBasket} />

@@ -35,13 +35,21 @@ function App({ store }) {
     deliteBasket: useCallback((code) => {
       store.deliteBasket(code);
     }, [store]),
+
+    openBasket: useCallback(() => {
+      store.openBasket();
+    }, [store]),
+
+    closeBasket: useCallback(() => {
+      store.closeBasket();
+    }, [store]),
   }
 
   return (
     <PageLayout>
       <Head title='Магазин' />
-      <Controls onAdd={callbacks.onAddItem} basket={basket} />
-      <Basket basket={basket} deliteBasket={callbacks.deliteBasket} />
+      <Controls onAdd={callbacks.onAddItem} basket={basket} openBasket={callbacks.openBasket} />
+      {store.state.popup ? <Basket basket={basket} deliteBasket={callbacks.deliteBasket} closeBasket={callbacks.closeBasket} /> : ''}
       <List list={list}
         onDeleteItem={callbacks.onDeleteItem}
         onSelectItem={callbacks.onSelectItem}

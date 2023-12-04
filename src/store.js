@@ -138,6 +138,29 @@ class Store {
       })
     })
   }
+
+  /**
+ * Открыть корзину
+ * 
+ */
+  openBasket() {
+    this.setState({
+      ...this.state,
+      // Новый список, в котором не будет удаляемой записи
+      popup: true
+    })
+  };
+  /**
+* Закрыть корзину
+* 
+*/
+  closeBasket() {
+    this.setState({
+      ...this.state,
+      // Новый список, в котором не будет удаляемой записи
+      popup: false
+    })
+  };
 }
 
 export default Store;

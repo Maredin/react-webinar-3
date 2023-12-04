@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { plural } from "../../utils";
 import './style.css';
 
-function Controls({ basket }) {
-  // Показать корзину
-  function goBasket() {
-    const basket = document.querySelector('.Basket__wrapper');
-    basket.style.display = 'flex';
-  }
+function Controls({ basket, openBasket }) {
 
   // Стоимость товара
   function amount() {
@@ -33,7 +28,7 @@ function Controls({ basket }) {
   return (
     <div className='Controls'>
       <div className="Bascet">В корзине: <span> {plur()} </span></div>
-      <button onClick={() => goBasket()}>Перейти</button>
+      <button onClick={() => openBasket()}>Перейти</button>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 .Basket__wrapper {
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
